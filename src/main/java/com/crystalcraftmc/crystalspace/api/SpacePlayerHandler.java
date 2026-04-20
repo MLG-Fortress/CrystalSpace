@@ -18,6 +18,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import com.crystalcraftmc.crystalspace.util.LegacyMaterials;
 
 import java.util.logging.Level;
 
@@ -131,9 +132,9 @@ public class SpacePlayerHandler {
             }
         } else if (armortype.equalsIgnoreCase("gold")) {
             // Gold
-            if (!playerBoot.getType().equals(Material.GOLD_BOOTS)
-                    || !playerChest.getType().equals(Material.GOLD_CHESTPLATE)
-                    || !playerLeg.getType().equals(Material.GOLD_LEGGINGS)
+            if (!playerBoot.getType().equals(Material.GOLDEN_BOOTS)
+                    || !playerChest.getType().equals(Material.GOLDEN_CHESTPLATE)
+                    || !playerLeg.getType().equals(Material.GOLDEN_LEGGINGS)
 					) {
                 return false;
             }
@@ -183,7 +184,7 @@ public class SpacePlayerHandler {
 		}
 		try {
 			int id = Integer.parseInt(materialOrId);
-			return new ItemStack(id);
+			return new ItemStack(LegacyMaterials.fromId(id));
 		} catch (NumberFormatException ex) {
 			MessageHandler.debugPrint(Level.WARNING, "You have an error in your config.yml: " + materialOrId + " is not a material name or id.");
 		}
@@ -191,7 +192,7 @@ public class SpacePlayerHandler {
     }
 	
 	public static boolean typeAndAmountEqual(ItemStack one, ItemStack two) {
-		return one.getAmount() == two.getAmount() && one.getTypeId() == two.getTypeId();
+		return one.getAmount() == two.getAmount() && one.getType() == two.getType();
 	}
 
     /**
@@ -235,7 +236,7 @@ public class SpacePlayerHandler {
         boolean insideArea = false;
         String id = ConfigHandler.getID(loc.getWorld());
         while (i < ConfigHandler.getRoomHeight(id)) {
-            if (block.getTypeId() != 0) {
+            if (!block.getType().isAir()) {
                 insideArea = true;
                 i = 0;
                 break;

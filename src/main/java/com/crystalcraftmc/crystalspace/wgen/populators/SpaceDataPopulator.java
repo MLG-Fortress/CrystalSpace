@@ -41,7 +41,7 @@ public class SpaceDataPopulator extends BlockPopulator {
         if (coords.get(world) == null) return;
         for (WrappedCoords c : coords.get(world).keySet()) {
             if (c.chunkX == chunk.getX() && c.chunkZ == chunk.getZ()) {
-                chunk.getBlock(c.x, c.y, c.z).setData(coords.get(world).get(c));
+                // Legacy data values unsupported on modern API; keep base block material only.
             }
         }
     }

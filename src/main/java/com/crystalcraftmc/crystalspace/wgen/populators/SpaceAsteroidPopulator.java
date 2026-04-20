@@ -43,45 +43,45 @@ public class SpaceAsteroidPopulator extends BlockPopulator {
         for (int i = 0; i < 2; i++) {
             Block block = getRandomBlock(source, random);
             String id = ConfigHandler.getID(world);
-            if (random.nextInt(200) <= ConfigHandler.getStoneChance(id) && block.getTypeId() == 0) {
-                block.setTypeId(1);
+            if (random.nextInt(200) <= ConfigHandler.getStoneChance(id) && block.getType().isAir()) {
+                block.setType(org.bukkit.Material.STONE);
                 for (int j = 0; j < 1500; j++) {
                     Block current = block.getRelative(random.nextInt(8) - random.nextInt(8),
                             random.nextInt(12),
                             random.nextInt(8) - random.nextInt(8));
-                    if (current.getTypeId() != 0) {
+                    if (!current.getType().isAir()) {
                         continue;
                     }
                     int count = 0;
                     for (BlockFace face : faces) {
-                        if (current.getRelative(face).getTypeId() == 1) {
+                        if (current.getRelative(face).getType() == org.bukkit.Material.STONE) {
                             count++;
                         }
                     }
                     if (count == 1) {
-                        current.setTypeId(1);
+                        current.setType(org.bukkit.Material.STONE);
                     }
                 }
             }
             block = getRandomBlock(source, random);
-            if (random.nextInt(200) <= ConfigHandler.getGlowstoneChance(id) && block.getTypeId() == 0) {
-                block.setTypeId(89);
+            if (random.nextInt(200) <= ConfigHandler.getGlowstoneChance(id) && block.getType().isAir()) {
+                block.setType(org.bukkit.Material.GLOWSTONE);
 
                 for (int j = 0; j < 1500; j++) {
                     Block current = block.getRelative(random.nextInt(8) - random.nextInt(8),
                             random.nextInt(12),
                             random.nextInt(8) - random.nextInt(8));
-                    if (current.getTypeId() != 0) {
+                    if (!current.getType().isAir()) {
                         continue;
                     }
                     int count = 0;
                     for (BlockFace face : faces) {
-                        if (current.getRelative(face).getTypeId() == 89) {
+                        if (current.getRelative(face).getType() == org.bukkit.Material.GLOWSTONE) {
                             count++;
                         }
                     }
                     if (count == 1) {
-                        current.setTypeId(89);
+                        current.setType(org.bukkit.Material.GLOWSTONE);
                     }
                 }
             }

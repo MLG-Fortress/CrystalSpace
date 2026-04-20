@@ -11,6 +11,7 @@ package com.crystalcraftmc.crystalspace.wgen.populators;
 
 import com.crystalcraftmc.crystalspace.handlers.ConfigHandler;
 import org.bukkit.Chunk;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.generator.BlockPopulator;
@@ -25,7 +26,7 @@ import java.util.Random;
  * @author jflory7 
  */
 public class SpaceBlackHolePopulator extends BlockPopulator {
-    public static final int ID_TO_USE = 120; //for easier changing if needed
+    public static final Material TYPE_TO_USE = Material.END_PORTAL_FRAME; //for easier changing if needed
 
     public SpaceBlackHolePopulator() {
     }
@@ -53,7 +54,7 @@ public class SpaceBlackHolePopulator extends BlockPopulator {
             int z = random.nextInt(16);
             int y = random.nextInt(world.getMaxHeight());
             Block block = world.getBlockAt((chunkX * 16 + x), y, (chunkZ * 16 + z));
-            block.setTypeId(ID_TO_USE);
+            block.setType(TYPE_TO_USE);
         }
     }
 

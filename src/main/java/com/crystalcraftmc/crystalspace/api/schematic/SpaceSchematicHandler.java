@@ -16,6 +16,7 @@ import org.bukkit.World;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.BlockVector;
 import org.jnbt.*;
+import com.crystalcraftmc.crystalspace.util.LegacyMaterials;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -82,7 +83,6 @@ public class SpaceSchematicHandler {
 
             for (Material material : blocksMap.get(location).keySet()) {
                 world.getBlockAt(originX, originY, originZ).setType(material);
-                world.getBlockAt(originX, originY, originZ).setData(blocksMap.get(location).get(material).getData());
             }
         }
     }
@@ -250,7 +250,7 @@ public class SpaceSchematicHandler {
             for (int y = 0; y < schematic.getHeight(); ++y) {
                 for (int z = 0; z < schematic.getLength(); ++z) {
                     int index = y * schematic.getWidth() * schematic.getLength() + z * schematic.getWidth() + x;
-                    Material block = Material.getMaterial(schematic.getBlocks()[index]);
+                    Material block = LegacyMaterials.fromId(Byte.toUnsignedInt(schematic.getBlocks()[index]));
                     MaterialData blockData = null;
                     try {
                         blockData = new MaterialData(block, schematic.getBlockData()[index]);

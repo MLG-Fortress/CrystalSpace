@@ -50,12 +50,12 @@ public class SpaceSatellitePopulator extends BlockPopulator {
     private void buildSatellite(World world, int height, Chunk source) {
         for (int x = 0; x < 5; x++) {
             for (int y = 0; y < 3; y++) {
-                source.getBlock(y, height, x).setTypeId(102);
+                source.getBlock(y, height, x).setType(org.bukkit.Material.GLASS_PANE);
             }
         }
         for (int x = 6; x < 11; x++) {
             for (int y = 0; y < 3; y++) {
-                source.getBlock(y, height, x).setTypeId(102);
+                source.getBlock(y, height, x).setType(org.bukkit.Material.GLASS_PANE);
             }
         }
         for (int y = 0; y < 3; y++) {

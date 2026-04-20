@@ -14,6 +14,7 @@ import com.crystalcraftmc.crystalspace.wgen.populators.SpaceBlackHolePopulator;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -61,11 +62,10 @@ public class BlackHolePlayerListener implements Listener {
 	if (event.isCancelled() || !WorldHandler.isInAnySpace(event.getPlayer()) || event.getPlayer().getHealth() == 0 || !event.getPlayer().hasPermission("CrystalSpace.ignoreblackholes")) {
             return;
         }
-	String id = WorldHandler.getID(event.getPlayer().getWorld());
-	if(Action.LEFT_CLICK_BLOCK != event.getAction() || event.getClickedBlock().getTypeId() != SpaceBlackHolePopulator.ID_TO_USE){
+	if(Action.LEFT_CLICK_BLOCK != event.getAction() || event.getClickedBlock().getType() != SpaceBlackHolePopulator.TYPE_TO_USE){
 	    return;
 	}
-	event.getClickedBlock().setTypeId(0);
+	event.getClickedBlock().setType(org.bukkit.Material.AIR);
     }
     /**
      * Gets all running suck tasks.
@@ -95,7 +95,7 @@ public class BlackHolePlayerListener implements Listener {
                     for (int y = 0; y < 128; y++) {
                         for (int z = 0; z < 16; z++) {
 			    Block block = chunk.getBlock(x, y, z);
-			    if(block.getTypeId() == SpaceBlackHolePopulator.ID_TO_USE){
+			    if(block.getType() == SpaceBlackHolePopulator.TYPE_TO_USE){
 				nonSpoutBlocks.add(block);
 			    }
 
